@@ -1,0 +1,135 @@
+                                                                                                                                                                                                                                               <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Music Emotion Recognition</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands"></script>
+  <style>
+  input[type=file] {
+    margin: 0 auto;
+  }
+  </style>
+</head>
+<body class="d-flex flex-column" background="https://www.biomaxsecurity.com/storage/app/media/device/MainBackgrounds/Face/N-Bio101W.png">
+  <div class="jumbotron text-center">
+  <h1>Music Emotion Recognizer</h1>
+  <p>In real-time!</p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8 text-center">
+        <h2>Training</h2>
+        <p>Start training by playing the desired type of music while pressing and holding down the corresponding button, just avoid the unneccasary noise. When you're done hit the "Train" button.</p>
+        <div class="btn-group">
+          <button id="happy" class="btn btn-default" onmousedown="collect(0)" onmouseup="collect(null)">Happy</button>
+          <button id="angry" class="btn btn-default" onmousedown="collect(1)" onmouseup="collect(null)">Sad</button>
+          <button id="sad" class="btn btn-default" onmousedown="collect(2)" onmouseup="collect(null)">Angry</button>
+          <button id="noise" class="btn btn-default" onmousedown="collect(3)" onmouseup="collect(null)">Noise</button>
+        </div>
+        <p></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8 text-center">
+          <button id="train" class="btn btn-primary" onclick="train()">Train</button>
+      </div>
+    </div>
+    <br>
+</br>
+<br>
+</br>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8 text-center">
+        <h2>Testing</h2>
+        <p>Once the model is trained, begin testing by hitting the "Listen" button. The app will then start listening to incoming audio and report the confidence values for each emotion in the table below.</p>
+        <p>If you're not happy with how the model is performing, you can go back and add some more examples, then retrain it.</p>
+        <button id="listen" class="btn btn-primary" onclick="listen()">Listen</button>
+        <p></p>
+      </div>
+    </div>
+    <br>
+</br>
+<br>
+</br>
+<br>
+</br>
+     
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 text-center">
+        <table class="table table-bordered" id="emotions-table">
+          <thead>
+            <tr>
+              <th scope="col" class="text-center">Emotion</th>
+              <th scope="col" class="text-center">Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Happy</td>
+              <td>8.0</td>
+            </tr>
+            <tr>
+              <td>Sad</td>
+              <td>0.0</td>
+            </tr>
+            <tr>
+              <td>Angry</td>
+              <td>0.0</td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="console"></div>
+      </div>
+    </div>
+    <br>
+</br>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8 text-center">
+        <h2>Save Model</h2>
+        <p>Here you can save your trained model for later use.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 text-center">
+        <label for="model-name">Model Name:</label>
+        <input type="text" class="form-control" id="model-name" placeholder="my-model">
+        <p></p>
+        <button id="save" class="btn btn-primary" onclick="save()">Save</button>
+      </div>
+    </div>
+<br>
+</br>
+<br>
+</br>
+  <div class="footer-basic text-center">  
+    <footer>
+         <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+         <ul class="list-inline">
+                        <li class="list-inline-item"><a href="#">Home</a></li>
+                        <li class="list-inline-item"><a href="#">Services</a></li>
+                        <li class="list-inline-item"><a href="#">About</a></li>
+                        <li class="list-inline-item"><a href="#">Terms</a></li>
+                        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p class="copyright">Company Name © 2023</p>
+    </footer>
+</div>
+<br>
+</br>
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+<script src="js/index.js"></script>
+</html>
